@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.winmax.dao.CFlowTaskCurrentDao" >
+  <resultMap id="BaseResultMap" type="com.winmax.model.CFlowTaskCurrent" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="process_id" property="processId" jdbcType="BIGINT" />
+    <result column="busi_id" property="busiId" jdbcType="BIGINT" />
+    <result column="busi_type" property="busiType" jdbcType="TINYINT" />
+    <result column="current_task_id" property="currentTaskId" jdbcType="BIGINT" />
+    <result column="finish_flag" property="finishFlag" jdbcType="TINYINT" />
+    <result column="void_flag" property="voidFlag" jdbcType="TINYINT" />
+    <result column="created_by" property="createdBy" jdbcType="BIGINT" />
+    <result column="created_date" property="createdDate" jdbcType="TIMESTAMP" />
+    <result column="modified_by" property="modifiedBy" jdbcType="BIGINT" />
+    <result column="modified_date" property="modifiedDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      id, process_id, busi_id, busi_type, current_task_id, finish_flag, void_flag, created_by, 
+      created_date, modified_by, modified_date
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.winmax.model.CFlowTaskCurrentQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from c_flow_task_current
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    id,process_id,busi_id,busi_type,current_task_id,finish_flag,void_flag,created_by,created_date,modified_by,modified_date
+    from c_flow_task_current
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from c_flow_task_current
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.winmax.model.CFlowTaskCurrentQuery" >
+    delete from c_flow_task_current
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.winmax.model.CFlowTaskCurrent" >
+    insert into c_flow_task_current (id, process_id, busi_id, 
+      busi_type, current_task_id, finish_flag, 
+      void_flag, created_by, created_date, 
+      modified_by, modified_date)
+    values (#{id,jdbcType=BIGINT}, #{processId,jdbcType=BIGINT}, #{busiId,jdbcType=BIGINT}, 
+      #{busiType,jdbcType=TINYINT}, #{currentTaskId,jdbcType=BIGINT}, #{finishFlag,jdbcType=TINYINT}, 
+      #{voidFlag,jdbcType=TINYINT}, #{createdBy,jdbcType=BIGINT}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{modifiedBy,jdbcType=BIGINT}, #{modifiedDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.winmax.model.CFlowTaskCurrent" >
+    insert into c_flow_task_current
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="processId != null" >
+        process_id,
+      </if>
+      <if test="busiId != null" >
+        busi_id,
+      </if>
+      <if test="busiType != null" >
+        busi_type,
+      </if>
+      <if test="currentTaskId != null" >
+        current_task_id,
+      </if>
+      <if test="finishFlag != null" >
+        finish_flag,
+      </if>
+      <if test="voidFlag != null" >
+        void_flag,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="createdDate != null" >
+        created_date,
+      </if>
+      <if test="modifiedBy != null" >
+        modified_by,
+      </if>
+      <if test="modifiedDate != null" >
+        modified_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="processId != null" >
+        #{processId,jdbcType=BIGINT},
+      </if>
+      <if test="busiId != null" >
+        #{busiId,jdbcType=BIGINT},
+      </if>
+      <if test="busiType != null" >
+        #{busiType,jdbcType=TINYINT},
+      </if>
+      <if test="currentTaskId != null" >
+        #{currentTaskId,jdbcType=BIGINT},
+      </if>
+      <if test="finishFlag != null" >
+        #{finishFlag,jdbcType=TINYINT},
+      </if>
+      <if test="voidFlag != null" >
+        #{voidFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedBy != null" >
+        #{modifiedBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedDate != null" >
+        #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.winmax.model.CFlowTaskCurrentQuery" resultType="java.lang.Integer" >
+    select count(*) from c_flow_task_current
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update c_flow_task_current
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.processId != null" >
+        process_id = #{record.processId,jdbcType=BIGINT},
+      </if>
+      <if test="record.busiId != null" >
+        busi_id = #{record.busiId,jdbcType=BIGINT},
+      </if>
+      <if test="record.busiType != null" >
+        busi_type = #{record.busiType,jdbcType=TINYINT},
+      </if>
+      <if test="record.currentTaskId != null" >
+        current_task_id = #{record.currentTaskId,jdbcType=BIGINT},
+      </if>
+      <if test="record.finishFlag != null" >
+        finish_flag = #{record.finishFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.voidFlag != null" >
+        void_flag = #{record.voidFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.createdBy != null" >
+        created_by = #{record.createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="record.createdDate != null" >
+        created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifiedBy != null" >
+        modified_by = #{record.modifiedBy,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifiedDate != null" >
+        modified_date = #{record.modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update c_flow_task_current
+    set id = #{record.id,jdbcType=BIGINT},
+      process_id = #{record.processId,jdbcType=BIGINT},
+      busi_id = #{record.busiId,jdbcType=BIGINT},
+      busi_type = #{record.busiType,jdbcType=TINYINT},
+      current_task_id = #{record.currentTaskId,jdbcType=BIGINT},
+      finish_flag = #{record.finishFlag,jdbcType=TINYINT},
+      void_flag = #{record.voidFlag,jdbcType=TINYINT},
+      created_by = #{record.createdBy,jdbcType=BIGINT},
+      created_date = #{record.createdDate,jdbcType=TIMESTAMP},
+      modified_by = #{record.modifiedBy,jdbcType=BIGINT},
+      modified_date = #{record.modifiedDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.winmax.model.CFlowTaskCurrent" >
+    update c_flow_task_current
+    <set >
+      <if test="processId != null" >
+        process_id = #{processId,jdbcType=BIGINT},
+      </if>
+      <if test="busiId != null" >
+        busi_id = #{busiId,jdbcType=BIGINT},
+      </if>
+      <if test="busiType != null" >
+        busi_type = #{busiType,jdbcType=TINYINT},
+      </if>
+      <if test="currentTaskId != null" >
+        current_task_id = #{currentTaskId,jdbcType=BIGINT},
+      </if>
+      <if test="finishFlag != null" >
+        finish_flag = #{finishFlag,jdbcType=TINYINT},
+      </if>
+      <if test="voidFlag != null" >
+        void_flag = #{voidFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdDate != null" >
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedBy != null" >
+        modified_by = #{modifiedBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedDate != null" >
+        modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.winmax.model.CFlowTaskCurrent" >
+    update c_flow_task_current
+    set process_id = #{processId,jdbcType=BIGINT},
+      busi_id = #{busiId,jdbcType=BIGINT},
+      busi_type = #{busiType,jdbcType=TINYINT},
+      current_task_id = #{currentTaskId,jdbcType=BIGINT},
+      finish_flag = #{finishFlag,jdbcType=TINYINT},
+      void_flag = #{voidFlag,jdbcType=TINYINT},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      modified_by = #{modifiedBy,jdbcType=BIGINT},
+      modified_date = #{modifiedDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
