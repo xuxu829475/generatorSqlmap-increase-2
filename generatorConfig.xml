@@ -119,7 +119,6 @@
 		<table schema="" tableName="research_supply_key_staff" domainObjectName="ResearchSupplyKeyStaff">
 			<!-- 数据删除状态=={0:无效,1:有效} -->
 			 <columnOverride column="void_flag" javaType="Integer"/>
-			 <columnOverride column="last" javaType="Integer"/>
 		</table>
 		<!-- <table schema="" tableName="research_supply_financ_deatil" domainObjectName="ResearchSupplyFinancDeatil">
 			数据删除状态=={0:无效,1:有效}
